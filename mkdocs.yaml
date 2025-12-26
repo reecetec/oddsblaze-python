@@ -42,9 +42,13 @@ markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.details
 
 nav:
   - Home: index.md
+  - Getting Started: getting-started.md
+  - Examples: examples.md
   - Project Notes:
       - Changelog: changelog.md
