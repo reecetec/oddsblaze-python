@@ -1,11 +1,30 @@
+"""OddsBlaze Python SDK."""
+
 from importlib.metadata import version
 
 from .client import OddsblazeClient
-from .settings import get_settings
+from .exceptions import (
+    AuthenticationError,
+    EventNotFoundError,
+    InvalidMarketError,
+    OddsblazeError,
+    PlayerNotFoundError,
+)
+from .settings import OddsblazeSettings, PriceFormat, get_settings
 
 __version__ = version("oddsblaze")
 
-settings = get_settings()
-client = OddsblazeClient(settings=settings)
-
-__all__ = ["client", "settings"]
+__all__ = [
+    # Client
+    "OddsblazeClient",
+    # Settings
+    "OddsblazeSettings",
+    "PriceFormat",
+    "get_settings",
+    # Exceptions
+    "OddsblazeError",
+    "AuthenticationError",
+    "InvalidMarketError",
+    "EventNotFoundError",
+    "PlayerNotFoundError",
+]
