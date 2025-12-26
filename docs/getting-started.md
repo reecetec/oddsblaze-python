@@ -18,12 +18,11 @@ pip install oddsblaze
 
 You need an API key from [oddsblaze.com](https://www.oddsblaze.com/).
 
-Set your API key using one of these methods (checked in order):
-
 === "Environment Variable"
 
     ```bash
     export ODDSBLAZE_API_KEY=your_key
+    export ODDSBLAZE_PRICE_FORMAT=decimal  # optional
     ```
 
 === ".env File"
@@ -32,25 +31,19 @@ Set your API key using one of these methods (checked in order):
 
     ```
     ODDSBLAZE_API_KEY=your_key
+    ODDSBLAZE_PRICE_FORMAT=decimal
     ```
 
-=== "Global Config"
-
-    Create a file at `~/.oddsblaze`:
+=== "Global Config (~/.oddsblaze)"
 
     ```
     ODDSBLAZE_API_KEY=your_key
+    ODDSBLAZE_PRICE_FORMAT=decimal
     ```
 
-### Price Format
+**Price formats:** `american` (default), `decimal`, `fractional`, `probability`, `malaysian`, `indonesian`, `hong_kong`
 
-You can configure the default price format:
-
-```bash
-export ODDSBLAZE_PRICE_FORMAT=decimal  # american (default), decimal, fractional, probability
-```
-
-Or set it per-request:
+You can also override price format per-request:
 
 ```python
 from oddsblaze import OddsblazeClient, PriceFormat
