@@ -510,7 +510,7 @@ wheels = [
 
 [[package]]
 name = "oddsblaze"
-version = "0.1.0.post3"
+version = "0.1.0.post9"
 source = { editable = "." }
 dependencies = [
     { name = "httpx" },
