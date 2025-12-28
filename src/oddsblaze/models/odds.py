@@ -20,6 +20,7 @@ class Odd(BaseModel):
     sgp: Optional[str] = None
     selection: Optional[Selection] = None
     player: Optional[Player] = None
+    updated: Optional[datetime] = None
 
 
 class Event(BaseModel):
