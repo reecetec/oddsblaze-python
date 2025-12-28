@@ -34,13 +34,16 @@ plugins:
         python:
           paths: [src]
           options:
-            show_root_heading: false
+            show_root_heading: true
             show_source: false
             show_value: false
             show_labels: false
+            docstring_style: google
             docstring_section_style: table
+            merge_init_into_class: true
             extensions:
-              - griffe_pydantic
+              - griffe_pydantic:
+                  schema: true
 
 markdown_extensions:
   - admonition
