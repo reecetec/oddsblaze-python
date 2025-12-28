@@ -3,7 +3,7 @@
 from datetime import datetime, timezone
 from typing import Annotated, Optional
 
-from pydantic import BaseModel, BeforeValidator
+from pydantic import BaseModel, BeforeValidator, Field
 
 from .base import Selection
 
@@ -22,26 +22,32 @@ TimestampMs = Annotated[datetime, BeforeValidator(_ms_to_datetime)]
 class PricePoint(BaseModel):
     """A price at a specific timestamp (CLV/OLV)."""
 
-    price: str
-    timestamp: TimestampMs
+    price: str = Field(description="The odds price")
+    timestamp: TimestampMs = Field(description="Timestamp of the price")
 
 
 class TimeSeriesEntry(BaseModel):
     """An entry in the line movement history."""
 
-    price: Optional[str] = None
-    locked: bool
-    timestamp: TimestampMs
+    price: Optional[str] = Field(
+        default=None, description="The odds price at this time"
+    )
+    locked: bool = Field(description="Whether the odds were locked/suspended")
+    timestamp: TimestampMs = Field(description="Timestamp of the update")
 
 
 class HistoricalResponse(BaseModel):
     """Response from the Historical Odds API endpoint."""
 
-    updated: datetime
-    id: str
-    market: str
-    name: str
-    selection: Optional[Selection] = None
-    olv: Optional[PricePoint] = None
-    clv: Optional[PricePoint] = None
-    entries: list[TimeSeriesEntry] = []
+    updated: datetime = Field(description="Response generation timestamp")
+    id: str = Field(description="The odds ID")
+    market: str = Field(description="Market name")
+    name: str = Field(description="Selection name")
+    selection: Optional[Selection] = Field(
+        default=None, description="Parsed selection details"
+    )
+    olv: Optional[PricePoint] = Field(default=None, description="Opening Line Value")
+    clv: Optional[PricePoint] = Field(default=None, description="Closing Line Value")
+    entries: list[TimeSeriesEntry] = Field(
+        default=[], description="Line movement history"
+    )
