@@ -2,6 +2,7 @@
 
 from importlib.metadata import version
 
+from .async_client import AsyncOddsblazeClient
 from .client import OddsblazeClient
 from .exceptions import (
     AuthenticationError,
@@ -17,6 +18,7 @@ __version__ = version("oddsblaze")
 __all__ = [
     # Client
     "OddsblazeClient",
+    "AsyncOddsblazeClient",
     # Settings
     "OddsblazeSettings",
     "PriceFormat",
