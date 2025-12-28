@@ -233,6 +233,133 @@ class OddsblazeClient:
         data = self._request(self.GRADER_URL, params)
         return GraderResponse.model_validate(data)
 
+    def grade_moneyline(
+        self,
+        sportsbook: str,
+        event_id: str,
+        team: str,
+        *,
+        live: bool = False,
+    ) -> GraderResponse:
+        """
+        Grade a moneyline bet.
+
+        Args:
+            sportsbook: Sportsbook name (e.g., "FanDuel", "DraftKings")
+            event_id: Event ID (UUID)
+            team: Team name (e.g., "Boston Celtics")
+            live: Grade while event is still in progress
+        """
+        odds_id = f"{sportsbook}#{event_id}#Moneyline#{team}"
+        return self.grade_bet(odds_id, live=live)
+
+    def grade_spread(
+        self,
+        sportsbook: str,
+        event_id: str,
+        team: str,
+        line: float,
+        *,
+        market: str = "Point Spread",
+        live: bool = False,
+    ) -> GraderResponse:
+        """
+        Grade a point spread bet.
+
+        Args:
+            sportsbook: Sportsbook name (e.g., "FanDuel", "DraftKings")
+            event_id: Event ID (UUID)
+            team: Team name (e.g., "Boston Celtics")
+            line: The spread line (e.g., -2.5 or +2.5)
+            market: Market name (default "Point Spread", or "1st Quarter Point Spread")
+            live: Grade while event is still in progress
+        """
+        # Format line with sign (e.g., -2.5 or +2.5)
+        if line >= 0:
+            name = f"{team} +{line}"
+        else:
+            name = f"{team} {line}"
+        odds_id = f"{sportsbook}#{event_id}#{market}#{name}"
+        return self.grade_bet(odds_id, live=live)
+
+    def grade_total(
+        self,
+        sportsbook: str,
+        event_id: str,
+        side: str,
+        line: float,
+        *,
+        market: str = "Total Points",
+        live: bool = False,
+    ) -> GraderResponse:
+        """
+        Grade a total points bet.
+
+        Args:
+            sportsbook: Sportsbook name (e.g., "FanDuel", "DraftKings")
+            event_id: Event ID (UUID)
+            side: "Over" or "Under"
+            line: The total line (e.g., 229.5)
+            market: Market name (default "Total Points", or "1st Quarter Total Points")
+            live: Grade while event is still in progress
+        """
+        name = f"{side} {line}"
+        odds_id = f"{sportsbook}#{event_id}#{market}#{name}"
+        return self.grade_bet(odds_id, live=live)
+
+    def grade_yes_no(
+        self,
+        sportsbook: str,
+        event_id: str,
+        market: str,
+        selection: str,
+        *,
+        live: bool = False,
+    ) -> GraderResponse:
+        """
+        Grade a Yes/No or simple selection bet.
+
+        Args:
+            sportsbook: Sportsbook name (e.g., "FanDuel", "DraftKings")
+            event_id: Event ID (UUID)
+            market: Market name (e.g., "Overtime?", "Total Points Odd/Even")
+            selection: The selection (e.g., "Yes", "No", "Odd", "Even")
+            live: Grade while event is still in progress
+        """
+        odds_id = f"{sportsbook}#{event_id}#{market}#{selection}"
+        return self.grade_bet(odds_id, live=live)
+
+    def grade_player_bet(
+        self,
+        sportsbook: str,
+        event_id: str,
+        market: str,
+        player_name: str,
+        player_id: str,
+        side: str,
+        line: float,
+        *,
+        live: bool = False,
+    ) -> GraderResponse:
+        """
+        Grade a player prop bet.
+
+        Builds the odds ID automatically from the provided components.
+
+        Args:
+            sportsbook: Sportsbook name (e.g., "FanDuel", "DraftKings")
+            event_id: Event ID (UUID)
+            market: Market name (e.g., "Player Points", "Player Rebounds")
+            player_name: Player's name (e.g., "Jaylen Brown")
+            player_id: Player's UUID (from a previous get_odds() call)
+            side: Selection side ("Over" or "Under")
+            line: The betting line (e.g., 22.5)
+            live: Grade while event is still in progress
+        """
+        name = f"{player_name} {side} {line}"
+        odds_id = f"{sportsbook}#{event_id}#{market}#{name}#{player_id}"
+        return self.grade_bet(odds_id, live=live)
+
     # -------------------------------------------------------------------------
     # Schedule API
     # -------------------------------------------------------------------------
