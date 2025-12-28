@@ -50,5 +50,6 @@ nav:
   - Home: index.md
   - Getting Started: getting-started.md
   - Examples: examples.md
+  - Async Examples: async-examples.md
   - Project Notes:
       - Changelog: changelog.md
