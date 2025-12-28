@@ -1,81 +1,87 @@
+---
+toc_depth: 3
+---
+
 # Models
 
 The SDK uses [Pydantic](https://docs.pydantic.dev/) models for all API responses.
 
 ## Core Models
 
-### OddsResponse
 ::: oddsblaze.models.odds.OddsResponse
     options:
       show_root_heading: true
-      members: true
+      heading_level: 3
+      members: false
 
-### Event
 ::: oddsblaze.models.odds.Event
     options:
       show_root_heading: true
-      members: true
+      heading_level: 3
+      members: false
 
-### Odd
 ::: oddsblaze.models.odds.Odd
     options:
       show_root_heading: true
-      members: true
+      heading_level: 3
+      members: false
 
 ## Schedule
 
-### ScheduleResponse
 ::: oddsblaze.models.schedule.ScheduleResponse
     options:
       show_root_heading: true
-      members: true
+      heading_level: 3
+      members: false
 
-### ScheduleEvent
 ::: oddsblaze.models.schedule.ScheduleEvent
     options:
       show_root_heading: true
-      members: true
+      heading_level: 3
+      members: false
 
 ## Other Responses
 
-### Grader
 ::: oddsblaze.models.grader.GraderResponse
     options:
       show_root_heading: true
-      members: true
+      heading_level: 3
+      members: false
 
-### Consensus
 ::: oddsblaze.models.consensus.ConsensusResponse
     options:
       show_root_heading: true
-      members: true
+      heading_level: 3
+      members: false
 
-### Historical
 ::: oddsblaze.models.historical.HistoricalResponse
     options:
       show_root_heading: true
-      members: true
+      heading_level: 3
+      members: false
 
-### Active Markets
 ::: oddsblaze.models.markets.ActiveMarketsResponse
     options:
       show_root_heading: true
-      members: true
+      heading_level: 3
+      members: false
 
-### Last Polled
 ::: oddsblaze.models.polled.PolledResponse
     options:
       show_root_heading: true
-      members: true
+      heading_level: 3
+      members: false
 
 ## Base Models
 
 ::: oddsblaze.models.base.League
     options:
       show_root_heading: true
-      members: true
+      heading_level: 3
+      members: false
 
 ::: oddsblaze.models.base.Sportsbook
     options:
       show_root_heading: true
-      members: true
+      heading_level: 3
+      members: false
